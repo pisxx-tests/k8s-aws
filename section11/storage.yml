@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  # storageClassName: azurestorage
+  storageClassName: managed-premium
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: azure-disk
+# spec:
+#   storageClassName: azurestorage
+#   accessModes:
+#     - ReadWriteOnce
+#   capacity:
+#     storage: 20Gi
+#   azureDisk:
+#     diskName: 
+#     diskURI: 

@@ -1,0 +1,21 @@
+export NAME=fleetman.k8s.local
+export KOPS_STATE_STORE=s3://pslawek-kops
+
+
+## create config
+kops create cluster --zones us-east-1a,us-east-1b,us-east-1c $NAME
+
+
+## get ig
+kops get ig --name $NAME
+
+## edit ig
+kops edit ig <IG_NAME> --name $NAME
+
+## deploy cluster
+kops update cluster $NAME --yes
+
+## checking cluster
+kops validate cluster $NAME
+
+kubectl get nodes --show-labels
