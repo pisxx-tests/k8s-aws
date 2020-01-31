@@ -3,25 +3,21 @@ kind: PersistentVolumeClaim
 metadata:
   name: mongo-pvc
 spec:
-  # storageClassName: azurestorage
-  storageClassName: managed-premium
+  storageClassName: aws-ssd
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
 
-# ---
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: azure-disk
-# spec:
-#   storageClassName: azurestorage
-#   accessModes:
-#     - ReadWriteOnce
-#   capacity:
-#     storage: 20Gi
-#   azureDisk:
-#     diskName: 
-#     diskURI: 
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: aws-ssd 
+# annotations:
+#     storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4 
